@@ -39,14 +39,13 @@ def search_image(search_term):
 
 def get_image_url():
     check_list = []
-    counter = 0
     for y in range(10):
         scroll_down()
         images = browser.find_elements_by_xpath('//*[@id="app"]//img')
         for image in images:
             if "photo" in image.get_attribute('src'):
                 src = image.get_attribute('src')
-                if counter == 20:
+                if counter == image_amount:
                     winsound.Beep(500, 200)
                     return 0
                 if check_list.count(src) == 0:
@@ -72,4 +71,6 @@ def scroll_down():
 
 keywords = [item for item in input("Enter the Keywords: ").split()]
 for keyword in keywords:
+    counter = 0
+    image_amount = 20;
     search_image(keyword)
